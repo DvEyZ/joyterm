@@ -7,9 +7,10 @@ JoyTerm is header-only library, so you just `#include <joyterm.hpp>` and that's 
 #include <iostream>
 #include <joyterm.hpp>
 
+using namespace joyterm::style;
 int main()
 {
     joyterm::init();
-    std::cout << joyterm::style::MStyle({FgColor::blue, BgColor::red, Style::bold}) << "Hello World!" << joyterm::style::MStyle({Style::reset}) << "\n";
+    std::cout << MStyle({FgColor::blue, BgColor::red, Style::bold}) << "Hello World!" << MStyle({Style::reset}) << "\n";
 }
 ```
