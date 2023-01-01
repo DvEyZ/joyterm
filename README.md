@@ -1,5 +1,5 @@
 # JoyTerm  
-JoyTerm is a simple C++ library for colorful terminal output.
+JoyTerm is a C++ library for colorful terminal output.
 ## Usage
 JoyTerm is header-only library, so you just `#include <joyterm.hpp>` and that's it!
 ### Styles

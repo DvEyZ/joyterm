@@ -10,7 +10,7 @@
 
 namespace joyterm
 {
-    void init()
+    static void init()
     {
 #ifdef WIN32
         HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -80,7 +80,7 @@ namespace joyterm
             std::vector <int> style;
         };
 
-        std::ostream& operator<<(std::ostream& os, joyterm::style::MStyle man)
+        static std::ostream& operator<<(std::ostream& os, joyterm::style::MStyle man)
         {
             man.act(os);
             return os;
