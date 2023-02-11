@@ -56,31 +56,39 @@ namespace joyterm
                 :style(_style)
             {}
 
-            void act(std::ostream& os)
+            template <class T>
+            void act(std::basic_ostream<T>& os)
             {
-                os << "\033[" <<
-                    [this] () -> std::string 
-                    {
-                        if(style.size() == 1) return std::to_string(style[0]);
-                        else
-                        {
-                            std::string temp;
-                            for(auto i : style)
-                            {
-                                temp += std::to_string(i) + ";";
-                            }
-                            temp.erase(temp.end() - 1);
-                            return temp;
-                        }
-                    } ()
-                << "m";
+                std::string beg = "\033[";
+                std::string end = "m";
+                auto vals = generate();
+
+                auto nbeg = std::basic_string<T>(beg.begin(), beg.end());
+                auto nmid = std::basic_string<T>(vals.begin(), vals.end());
+                auto nend = std::basic_string<T>(end.begin(), end.end());
+                os << nbeg << nmid << nend;
             }
 
         private:
+            std::string generate()
+            {
+                if(style.size() == 1) return std::to_string(style[0]);
+                else
+                {
+                    std::string temp;
+                    for(auto i : style)
+                    {
+                        temp += std::to_string(i) + ";";
+                    }
+                    temp.erase(temp.end() - 1);
+                    return temp;
+                }
+            }
             std::vector <int> style;
         };
 
-        static std::ostream& operator<<(std::ostream& os, joyterm::style::MStyle man)
+        template<class T>
+        static std::basic_ostream<T>& operator<<(std::basic_ostream<T>& os, joyterm::style::MStyle man)
         {
             man.act(os);
             return os;
