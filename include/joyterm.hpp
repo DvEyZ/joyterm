@@ -10,6 +10,9 @@
 
 namespace joyterm
 {
+    // Performs terminal initialization on Windows systems.
+    // No-op on POSIX systems.
+    // It is recommended to use this function before using other joyterm functions to ensure portability.
     static void init()
     {
 #ifdef WIN32
@@ -21,8 +24,10 @@ namespace joyterm
         SetConsoleMode(h, mode);
 #endif
     }
+
     namespace style
     {
+        // Represents foreground (text) colors.
         struct FgColor
         {
             enum fc
@@ -32,6 +37,7 @@ namespace joyterm
             };
         };
 
+        // Represents background colors.
         struct BgColor
         {
             enum bc
@@ -41,6 +47,8 @@ namespace joyterm
             };
         };
 
+        // Represents other modifiers, such as bold or italic text, or style reset modifier.
+        // Please note that not all of these modifiers are supported on all platforms.
         struct Style
         {
             enum style
